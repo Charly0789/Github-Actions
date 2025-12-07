@@ -1,26 +1,12 @@
-name: PR Commenter
-
-permissions:
-  pull-requests: write
-
+name: Post welcome comment
 on:
   pull_request:
     types: [opened]
+permissions:
+  pull-requests: write
 
 jobs:
-  add-comment:
+  welcome:
+    name: Post welcome comment
     runs-on: ubuntu-latest
-
-    steps:
-      - name: Comentar en el Pull Request
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.payload.pull_request.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: "Gracias por abrir este Pull Request 🚀 El equipo lo revisará."
-            })
 
